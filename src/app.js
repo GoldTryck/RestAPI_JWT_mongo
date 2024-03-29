@@ -10,7 +10,13 @@ app.use(morgan('dev')); //muestra las peticiones relaizadas por consola
 app.use(express.json()); // Convertir los req.body en formato json
 app.use(cookieParser()); // Convertir las cookies en formato json
 
+
 app.use('/api', authRoutes);
 app.use('/api', taskRoutes);
 
+app.use((req, res) => { // Toda solicitud que no coincidan con las rutas definidas antes responderan:
+    res.status(404).json({
+        message: 'End point not found'
+    })
+});
 export default app

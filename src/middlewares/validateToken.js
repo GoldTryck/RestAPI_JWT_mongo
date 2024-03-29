@@ -7,8 +7,7 @@ export const authRequired = (req, res, next) => {
     jwt.verify(token, TOKEN_SECRET, (err, user) => {
         if (err) return res.status(403).json({ message: 'Forbidden' });
         req.user = user; //Al mandar llamar /profile se envian los datos del usuario
-        next();
     });
-
+    next();
 
 }
